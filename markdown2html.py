@@ -17,5 +17,11 @@ if __name__ == "__main__":
         print(f"Missing {sys.argv[1]}", file=sys.stderr)
         exit(1)
 
+    with open(sys.argv[1], 'r', encoding='utf-8') as mardown:
+        with open(sys.argv[2], 'w', encoding='utf-8') as output:
+            for line in mardown.readlines():
+                nbr = line.count("#")
+                output.write(f"<h{nbr}>{line[nbr:].strip()}</h{nbr}>\n")
+
     # Nothing went wrong
     exit(0)
