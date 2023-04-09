@@ -1,9 +1,9 @@
 # My header
 
-- Hello
-- Someone
-- Bye
+* Hello
+* Someone
+* Bye
 
-#### Some stuffff
+Some stuffff
 
 ## Big head

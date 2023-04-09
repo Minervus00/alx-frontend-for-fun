@@ -35,23 +35,21 @@ if __name__ == "__main__":
         in_unordered = False
         for idx in range(l_nbr):
             # Check unordered list
-            if mkd_lines[idx][0] == '-':
+            if mkd_lines[idx][0] in ['-', '*']:
+                tag = {'-': "ul", '*': "ol"}[mkd_lines[idx][0]]
                 if not in_unordered:
                     in_unordered = True
-                    output.write('<ul>\n')
+                    output.write(f'<{tag}>\n')
 
                 output.write(f"<li>{mkd_lines[idx][1:].strip()}</li>\n")
 
-                # if idx == l_nbr-1 or mkd_lines[idx+1][0] != '\n':
-                #     output.write('<ul>\n')
-                #     in_unordered = False
                 continue
 
             # Check headers
             nbr = mkd_lines[idx].count("#")
             if nbr != 0:
                 if in_unordered:
-                    output.write('<ul>\n')
+                    output.write(f'</{tag}>\n')
                     in_unordered = False
                 output.write(
                     f"<h{nbr}>{mkd_lines[idx][nbr:].strip()}</h{nbr}>\n"
@@ -60,7 +58,7 @@ if __name__ == "__main__":
 
             # simple line
             if in_unordered and mkd_lines[idx] != '\n':
-                output.write('<ul>\n')
+                output.write(f'</{tag}>\n')
                 in_unordered = False
             output.write(mkd_lines[idx])
 
