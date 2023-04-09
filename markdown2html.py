@@ -42,20 +42,26 @@ if __name__ == "__main__":
 
                 output.write(f"\t<li>{mkd_lines[idx][1:].strip()}</li>\n")
 
-                if idx == l_nbr-1 or mkd_lines[idx+1][0] != '-':
-                    output.write('<ul>\n')
-                    in_unordered = False
+                # if idx == l_nbr-1 or mkd_lines[idx+1][0] != '\n':
+                #     output.write('<ul>\n')
+                #     in_unordered = False
                 continue
 
             # Check headers
             nbr = mkd_lines[idx].count("#")
             if nbr != 0:
+                if in_unordered:
+                    output.write('<ul>\n')
+                    in_unordered = False
                 output.write(
                     f"<h{nbr}>{mkd_lines[idx][nbr:].strip()}</h{nbr}>\n"
                 )
                 continue
 
             # simple line
+            if in_unordered and mkd_lines[idx] != '\n':
+                output.write('<ul>\n')
+                in_unordered = False
             output.write(mkd_lines[idx])
 
     # Nothing went wrong
