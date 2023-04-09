@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 """This script checks if 2 files are given as argument"""
 import sys
 import os.path
