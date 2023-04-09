@@ -1,11 +1,9 @@
 #!/usr/bin/python3
 """This script checks if 2 files are given as argument"""
-
+import sys
+import os.path
 
 if __name__ == "__main__":
-    import sys
-    import os.path
-
     if len(sys.argv) < 3:
         print(
             "Usage: ./markdown2html.py README.md README.html",
@@ -29,8 +27,6 @@ if __name__ == "__main__":
                 output.write(mkd_lines[idx])
                 continue
             output.write(f"<h{nbr}>{mkd_lines[idx][nbr:].strip()}</h{nbr}>\n")
-            # if idx+1 != l_nbr:
-            #     output.write('\n')
 
     # Nothing went wrong
     exit(0)
