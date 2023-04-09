@@ -40,7 +40,7 @@ if __name__ == "__main__":
                     in_unordered = True
                     output.write('<ul>\n')
 
-                output.write(f"\t<li>{mkd_lines[idx][1:].strip()}</li>\n")
+                output.write(f"<li>{mkd_lines[idx][1:].strip()}</li>\n")
 
                 # if idx == l_nbr-1 or mkd_lines[idx+1][0] != '\n':
                 #     output.write('<ul>\n')
