@@ -19,14 +19,18 @@ if __name__ == "__main__":
 
     with open(sys.argv[1], 'r', encoding='utf-8') as mardown:
         mkd_lines = mardown.readlines()
+        # print(mkd_lines)
         l_nbr = len(mkd_lines)
 
     with open(sys.argv[2], 'w', encoding='utf-8') as output:
         for idx in range(l_nbr):
             nbr = mkd_lines[idx].count("#")
-            output.write(f"<h{nbr}>{mkd_lines[idx][nbr:].strip()}</h{nbr}>")
-            if idx+1 != l_nbr:
-                output.write('\n')
+            if nbr == 0:
+                output.write(mkd_lines[idx])
+                continue
+            output.write(f"<h{nbr}>{mkd_lines[idx][nbr:].strip()}</h{nbr}>\n")
+            # if idx+1 != l_nbr:
+            #     output.write('\n')
 
     # Nothing went wrong
     exit(0)
