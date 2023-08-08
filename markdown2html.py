@@ -1,17 +1,16 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 """This script checks if 2 files are given as argument"""
 import sys
 import os.path
+import re
 
 
-def write_header():
-    # TODO
-    pass
+def is_header(line):
+    return line[0] == "#"
 
 
-def write_unordered():
-    # TODO
-    pass
+def is_unordered(line):
+    return line[0]
 
 
 if __name__ == "__main__":
@@ -43,6 +42,9 @@ if __name__ == "__main__":
 
                 output.write(f"<li>{mkd_lines[idx][1:].strip()}</li>\n")
 
+                if idx == l_nbr - 1:
+                    in_unordered = False
+                    output.write(f'</{tag}>\n')
                 continue
 
             # Check headers
@@ -60,6 +62,8 @@ if __name__ == "__main__":
             if in_unordered and mkd_lines[idx] != '\n':
                 output.write(f'</{tag}>\n')
                 in_unordered = False
+            if mkd_lines[idx] == '\n':
+                print('yoo', file=output)
             output.write(mkd_lines[idx])
 
     # Nothing went wrong
